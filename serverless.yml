@@ -1,0 +1,58 @@
+service:
+  name: cookie-authorizer-example
+provider:
+  name: aws
+  runtime: python3.7
+  stage: dev
+  region: us-east-1
+functions:
+  example:
+    handler: code/hello_world.lambda_handler
+    description:
+    events:
+      - http:
+          path: /
+          method: get
+          cors:
+            origins:
+              - https://example.com # <-- You have to specify origins wildcards will result in CORS Errors
+            allowCredentials: true
+          authorizer:
+            name: cookieAuthFunction
+            resultTtlInSeconds: 300
+            type: request # <-- Make sure the authorizer type is request
+  cookieAuthFunction:
+    handler: code/auth.lambda_handler
+resources:
+  # The following are necessary to avoid CORS Errors making debugging difficult if your function fails
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'https://example.com'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+    GatewayResponseDefault5XX:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'https://example.com'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+        ResponseType: DEFAULT_5XX
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+    S3Bucket:
+      Type: "AWS::S3::Bucket"
+package:
+  excludeDevDependencies: True
+  exclude:
+    - venv/**
+    - diagrams/**
+    - example-frontend/**
+    - README.md
+    - node_modules/**

@@ -1,0 +1,12 @@
+{
+  "name": "cookie-authorizer-example",
+  "version": "1.0.0",
+  "description": "generated from P&G generator",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aaron Osborne",
+  "license": "ISC"
+}
