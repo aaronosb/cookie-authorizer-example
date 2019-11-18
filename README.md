@@ -8,7 +8,7 @@ The main reason you may want to do this is to add an additional layer of securit
 
 ## Usage Example
 
-For more on how to implement this Cookie Based Authorizer along with CloudFront and Lambda@Edge to build federated private Serverless applications check out this blog post. [Coming Soon]
+For more on how to implement this Cookie Based Authorizer along with CloudFront and Lambda@Edge to build Private Serverless Web Applications check out this blog post. [Coming Soon]
 
 ## Key Implementation Details
 
