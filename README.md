@@ -1,4 +1,5 @@
 # API Gateway Cookie Based Custom Lambda Authorizer
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/aaronosb/cookie-authorizer-example.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/aaronosb/cookie-authorizer-example/alerts/)
 
 > This is an example of how to set up a custom lambda authorizer on an API Gateway to authenticate users/requests via Cookies instead of using the Authorization Header. This example uses the Serverless.com Framework
 
